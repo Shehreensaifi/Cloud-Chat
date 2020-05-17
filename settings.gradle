@@ -1,0 +1,2 @@
+rootProject.name='RainbowActivity'
+include ':app'
