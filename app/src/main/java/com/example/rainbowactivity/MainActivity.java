@@ -71,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logInClicked(View view) {
-        final String name = binding.etName.getText().toString().trim();
+
         final String email = binding.etEmail.getText().toString().trim();
         final String password = binding.etPassword.getText().toString().trim();
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if ( email.isEmpty() || password.isEmpty()) {
             Toast.makeText(MainActivity.this, "please enter all fields!", Toast.LENGTH_LONG).show();
         } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -94,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void forgetPasswordClicked(View view) {
+    public void forgetPasswordClicked(View view)
+    {
+
     }
 
 }

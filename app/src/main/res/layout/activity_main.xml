@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -40,10 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="enter your email"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
 
@@ -53,10 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="enter your password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
@@ -64,14 +69,11 @@
         android:id="@+id/tvForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
         android:onClick="forgetPasswordClicked"
         android:text="Forget Password?"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <Button
@@ -83,7 +85,7 @@
         android:layout_marginTop="24dp"
         android:onClick="logInClicked"
         android:text="LOG IN"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvForgetPassword" />
@@ -97,11 +99,15 @@
         android:onClick="signUpClicked"
         android:text="Sign Up"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogIn"
+
+        app:layout_constraintStart_toStartOf="@+id/btnLogIn"
         app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
         app:layout_constraintVertical_bias="0.01999998" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

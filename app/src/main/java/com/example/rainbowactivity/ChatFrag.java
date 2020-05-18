@@ -84,9 +84,13 @@ public class ChatFrag extends Fragment implements AdapterLastClass.OnItemClicked
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String uid = snapshot.getKey();
                         String from = snapshot.child("from").getValue().toString();
-                        String message = snapshot.child("message").getValue().toString();
+                        String message = snapshot.child("message").getValue().toString().trim();
                         String name = snapshot.child("name").getValue().toString();
                         String imageUrl = snapshot.child("imageUrl").getValue().toString();
+                        if(message.length()>20)
+                        {
+                            message=message.substring(0,18)+"...";
+                        }
 
                         messageList.add(new ChatLastMessageClass(name, imageUrl, uid, message, from));
 

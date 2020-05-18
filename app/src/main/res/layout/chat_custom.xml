@@ -51,7 +51,6 @@
                     android:id="@+id/tvLastText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:textSize="18sp"
                     tools:text=" hey its me your friend" />
 

@@ -29,8 +29,9 @@
 
                 <ImageButton
                     android:id="@+id/ibProfile"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:background="#10FFFFFF"
@@ -39,9 +40,10 @@
 
                 <TextView
                     android:id="@+id/tvName"
-                    android:layout_width="309dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_weight="6"
                     android:text="name"
                     android:textColor="#000000"
                     android:textSize="30sp"
@@ -49,8 +51,8 @@
 
                 <ImageButton
                     android:id="@+id/ibDeletePost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="34dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
@@ -68,7 +70,8 @@
                 android:text="message"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:paddingStart="10dp"/>
 
             <ImageView
                 android:id="@+id/ivPost"

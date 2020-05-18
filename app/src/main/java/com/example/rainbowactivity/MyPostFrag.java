@@ -204,31 +204,6 @@ public class MyPostFrag extends Fragment {
                             .apply(RequestOptions.circleCropTransform())
                             .into(holder.ibProfile);
                 }
-                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                        dialog.setTitle("Delete");
-                        dialog.setMessage("Are you sure you want to delete this post......");
-                        dialog.setNeutralButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                StorageReference mStorage = FirebaseStorage.getInstance().getReference().child(model.getUid()).child(model.getImageName());
-                                mStorage.delete();
-                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("post").child(model.getImageName());
-                                databaseReference.removeValue();
-                            }
-                        });
-                        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                        dialog.show();
-                        return true;
-                    }
-                });
                 holder.ibDeletePost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

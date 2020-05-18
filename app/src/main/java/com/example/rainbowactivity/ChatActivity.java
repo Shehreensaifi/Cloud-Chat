@@ -56,6 +56,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.yoo8));
         binding=ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -138,11 +139,17 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.On
              sendMessage();
          }
      });
+     binding.recyclerViewChat.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+         @Override
+         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+             binding.recyclerViewChat.scrollToPosition(messageAdapter.getItemCount()-1);
+         }
+     });
 
     }
 
     private void sendMessage() {
-        String message=binding.etMessage.getText().toString();
+        String message=binding.etMessage.getText().toString().trim();
 
         if(!TextUtils.isEmpty(message))
         {
