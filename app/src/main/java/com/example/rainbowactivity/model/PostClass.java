@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.model;
 
 public class PostClass {
     String name, imageUrl, profileUrl, message, uid, imageName;

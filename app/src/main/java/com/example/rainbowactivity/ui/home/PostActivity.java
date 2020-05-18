@@ -1,20 +1,20 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.rainbowactivity.ui.login.MainActivity;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.ActivityPostBinding;
+import com.example.rainbowactivity.ui.chat.whatsAppActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.message)
         {
-            startActivity(new Intent(this,whatsAppActivity.class));
+            startActivity(new Intent(this, whatsAppActivity.class));
         }
 
 

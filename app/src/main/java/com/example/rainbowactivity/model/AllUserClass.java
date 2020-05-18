@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.model;
 
 public class AllUserClass
 {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_google_signin_btn_text_dark_pressed"
-    tools:context=".PostFrag">
+    tools:context=".ui.home.allpost.PostFrag">
 
     <!-- TODO: Update blank fragment layout -->
 

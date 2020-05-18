@@ -1,8 +1,7 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.home.mypost;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +24,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.FragmentMyPostBinding;
+import com.example.rainbowactivity.model.PostClass;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.Continuation;

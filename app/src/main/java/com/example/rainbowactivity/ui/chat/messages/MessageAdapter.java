@@ -1,6 +1,5 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.chat.messages;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rainbowactivity.R;
+import com.example.rainbowactivity.model.MessageClass;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;

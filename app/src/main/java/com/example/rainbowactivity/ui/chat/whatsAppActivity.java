@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
 
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.ActivityWhatsAppBinding;
+import com.example.rainbowactivity.ui.login.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;

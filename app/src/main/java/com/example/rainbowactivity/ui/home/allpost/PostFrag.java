@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.home.allpost;
 
 import android.os.Bundle;
 
@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.FragmentPostBinding;
+import com.example.rainbowactivity.model.PostClass;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;

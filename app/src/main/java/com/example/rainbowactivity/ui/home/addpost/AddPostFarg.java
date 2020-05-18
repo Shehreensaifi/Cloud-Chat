@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.home.addpost;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,15 +12,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.rainbowactivity.databinding.ActivityMainBinding;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.FragmentAddPostFargBinding;
-import com.example.rainbowactivity.databinding.FragmentPostBinding;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

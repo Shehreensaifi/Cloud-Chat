@@ -1,31 +1,25 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.chat.messages;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.ActivityChatBinding;
+import com.example.rainbowactivity.model.MessageClass;
+import com.example.rainbowactivity.ui.chat.whatsAppActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -129,7 +123,7 @@ public class ChatActivity extends AppCompatActivity implements MessageAdapter.On
      binding.btnBack.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-             startActivity(new Intent(ChatActivity.this,whatsAppActivity.class));
+             startActivity(new Intent(ChatActivity.this, whatsAppActivity.class));
              finish();
          }
      });

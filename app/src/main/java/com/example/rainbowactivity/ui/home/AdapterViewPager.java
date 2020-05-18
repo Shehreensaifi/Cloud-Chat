@@ -1,9 +1,13 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.home;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.rainbowactivity.ui.home.addpost.AddPostFarg;
+import com.example.rainbowactivity.ui.home.allpost.PostFrag;
+import com.example.rainbowactivity.ui.home.mypost.MyPostFrag;
 
 public class AdapterViewPager extends FragmentStateAdapter {
 

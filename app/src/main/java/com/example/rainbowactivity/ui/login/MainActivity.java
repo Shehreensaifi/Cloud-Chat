@@ -1,16 +1,16 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.ActivityMainBinding;
+import com.example.rainbowactivity.ui.home.PostActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         currentUser=mAuth.getCurrentUser();
         if(currentUser!=null)
         {
-            startActivity(new Intent(MainActivity.this,PostActivity.class));
+            startActivity(new Intent(MainActivity.this, PostActivity.class));
             finish();
         }
     }

@@ -1,4 +1,4 @@
-package com.example.rainbowactivity;
+package com.example.rainbowactivity.ui.chat.allusers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.rainbowactivity.databinding.FragmentAddPostFargBinding;
+import com.example.rainbowactivity.ui.chat.messages.ChatActivity;
+import com.example.rainbowactivity.R;
 import com.example.rainbowactivity.databinding.FragmentContactsBinding;
+import com.example.rainbowactivity.model.AllUserClass;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,7 +99,7 @@ public class ContactsFrag extends Fragment {
                 holder.UserView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intentUser=new Intent(getActivity(),ChatActivity.class);
+                        Intent intentUser=new Intent(getActivity(), ChatActivity.class);
                         intentUser.putExtra("uid",model.getUid());
                         intentUser.putExtra("name",model.getName());
                         intentUser.putExtra("imageUrl",model.getImageUrl());
