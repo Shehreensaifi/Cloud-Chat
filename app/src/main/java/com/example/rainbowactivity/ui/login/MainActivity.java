@@ -96,6 +96,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void forgetPasswordClicked(View view)
     {
+        final String email = binding.etEmail.getText().toString().trim();
+        if(email.isEmpty())
+        {
+            Toast.makeText(this, "enter your email!", Toast.LENGTH_LONG).show();
+        }
+        else{
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful())
+                    {
+
+                        Toast.makeText(MainActivity.this, "password reset link send to your email!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
     }
 
