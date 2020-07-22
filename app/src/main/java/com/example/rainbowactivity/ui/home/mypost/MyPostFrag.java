@@ -13,9 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -54,7 +56,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyPostFrag extends Fragment {
+public class MyPostFrag extends Fragment implements MyPostAdapter.OnClickedListener {
     Query query;
     FragmentMyPostBinding binding;
     private FirebaseAuth mAuth;
@@ -64,8 +66,10 @@ public class MyPostFrag extends Fragment {
     EditText etChangeName;
     TextView tvYes,tvCancel;
     ProgressDialog progressDialog;
-   // RecyclerView recyclerView;
+    List<ItemClass> items;
+    MyPostAdapter adapter;
 
+   // RecyclerView recyclerView;
     public MyPostFrag() {
         // Required empty public constructor
     }
@@ -84,8 +88,9 @@ public class MyPostFrag extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final List<ItemClass> items=new ArrayList<>();
-        binding.recyclerView.setAdapter(new MyPostAdapter(items));
+         items=new ArrayList<>();
+        adapter =new MyPostAdapter(items,getContext(),this);
+        binding.recyclerView.setAdapter(adapter);
 
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("loading...");
@@ -96,43 +101,6 @@ public class MyPostFrag extends Fragment {
         query.keepSynced(true);
         mRef=FirebaseDatabase.getInstance().getReference().child("user").child(mAuth.getUid());
 
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name=dataSnapshot.child("name").getValue().toString();
-                String imageUrl=dataSnapshot.child("imageUrl").getValue().toString();
-
-                ProfileClass profile=new ProfileClass(
-                   name,imageUrl,mAuth.getUid()
-                );
-                items.add(new ItemClass(0,profile));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-//       mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//           @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String name=dataSnapshot.child("name").getValue().toString();
-//                String imageurl=dataSnapshot.child("imageUrl").getValue().toString();
-//                binding.tvName.setText(name);
-//                if(!imageurl.isEmpty())
-//                {
-//                    Glide.with(getActivity())
-//                            .load(imageurl)
-//                            .apply(RequestOptions.circleCropTransform())
-//                            .into(binding.ibProfile);
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
         userNameRef=FirebaseDatabase.getInstance().getReference().child("user").child(mAuth.getUid());
 //        binding.ibProfile.setOnLongClickListener(new View.OnLongClickListener() {
 //            @Override
@@ -201,7 +169,70 @@ public class MyPostFrag extends Fragment {
 
     }
 
-//    @Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        myPost();
+    }
+
+    void myPost(){
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name=dataSnapshot.child("name").getValue().toString();
+                String imageUrl=dataSnapshot.child("imageUrl").getValue().toString();
+
+                ProfileClass profile=new ProfileClass(
+                        name,imageUrl,mAuth.getUid()
+                );
+                items.clear();
+                items.add(new ItemClass(0,profile));
+                adapter.notifyDataSetChanged();
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                            String name=snapshot.child("name").getValue().toString();
+                            String imageUrl=snapshot.child("imageUrl").getValue().toString();
+                            String profileUrl=snapshot.child("profileUrl").getValue().toString();
+                            String imageName=snapshot.child("imageName").getValue().toString();
+                            String message=snapshot.child("message").getValue().toString();
+                            String uid=snapshot.child("uid").getValue().toString();
+                            Long time=Long.parseLong(snapshot.child("time").getValue().toString());
+                            PostClass post=new PostClass(
+                                    name,imageUrl,profileUrl,message,uid,imageName,time
+                            );
+                            items.add(new ItemClass(1,post));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+
+        });
+
+    }
+
+    @Override
+    public void onLongClickedProfile() {
+        CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .start(getContext(),MyPostFrag.this);
+    }
+
+    //    @Override
 ////    public void onStart() {
 ////        super.onStart();
 
@@ -262,67 +293,67 @@ public class MyPostFrag extends Fragment {
 //        binding.recyclerView.setAdapter(adapter);
 //    }
 
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            if (resultCode == RESULT_OK) {
-//                Uri resultUri = result.getUri();
-//                final StorageReference ref = FirebaseStorage.getInstance().getReference().child(mAuth.getUid()).child("profile");
-//                UploadTask uploadTask = ref.putFile(resultUri);
-//
-//                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//                    @Override
-//                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                        if (!task.isSuccessful()) {
-//                            throw task.getException();
-//                        }
-//
-//                        // Continue with the task to get the download URL
-//                        return ref.getDownloadUrl();
-//                    }
-//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Uri> task) {
-//                        if (task.isSuccessful()) {
-//                            progressDialog.show();
-//                            final Uri downloadUri = task.getResult();
-//                            mRef.child("imageUrl").setValue(downloadUri.toString());
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                final StorageReference ref = FirebaseStorage.getInstance().getReference().child(mAuth.getUid()).child("profile");
+                UploadTask uploadTask = ref.putFile(resultUri);
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return ref.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            progressDialog.show();
+                            final Uri downloadUri = task.getResult();
+                            mRef.child("imageUrl").setValue(downloadUri.toString());
 //                            Glide.with(MyPostFrag.this)
 //                                    .load(downloadUri)
 //                                    .apply(RequestOptions.circleCropTransform())
 //                                    .into();
-//                            query.addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                    for(DataSnapshot snapshot:dataSnapshot.getChildren())
-//                                    {
-//                                        FirebaseDatabase.getInstance().getReference().child("post").child(snapshot.getKey())
-//                                                .child("profileUrl").setValue(downloadUri.toString());
-//                                    }
-//                                   progressDialog.dismiss();
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                                        progressDialog.dismiss();
-//                                }
-//                            });
-//                        } else {
-//                            // Handle failures
-//                            // ...
-//                        }
-//                    }
-//                });
-//            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                Exception error = result.getError();
-//            }
-//        }
-//
-//
-//    }
+                            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                                    {
+                                        FirebaseDatabase.getInstance().getReference().child("post").child(snapshot.getKey())
+                                                .child("profileUrl").setValue(downloadUri.toString());
+                                    }
+                                   progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        progressDialog.dismiss();
+                                }
+                            });
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+
+
+    }
 //   class PostHolder extends RecyclerView.ViewHolder
 //    {
 //        ImageButton ibProfile;

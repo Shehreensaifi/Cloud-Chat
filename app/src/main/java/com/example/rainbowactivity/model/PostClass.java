@@ -1,8 +1,23 @@
 package com.example.rainbowactivity.model;
 
-public class PostClass {
+import androidx.annotation.NonNull;
+
+public class PostClass  {
     String name, imageUrl, profileUrl, message, uid, imageName;
     Long time;
+
+    @Override
+    public String toString() {
+        return "PostClass{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", profileUrl='" + profileUrl + '\'' +
+                ", message='" + message + '\'' +
+                ", uid='" + uid + '\'' +
+                ", imageName='" + imageName + '\'' +
+                ", time=" + time +
+                '}';
+    }
 
     public PostClass()
     {

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,13 +30,16 @@ public class MyPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<ItemClass> items;
     Context context;
+    OnClickedListener post;
 
-    public MyPostAdapter(List<ItemClass> items, Context context) {
-        this.items = items;
-        this.context = context;
+    interface OnClickedListener{
+        void onLongClickedProfile();
     }
 
-    public MyPostAdapter(List<ItemClass> items) {
+    public MyPostAdapter(List<ItemClass> items, Context context,OnClickedListener post) {
+        this.items = items;
+        this.context = context;
+        this.post=post;
     }
 
     @NonNull
@@ -57,6 +61,13 @@ public class MyPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if(getItemViewType(position)==0){
            ProfileClass profile=(ProfileClass)items.get(position).getObject();
             ((ProfileHolder)holder).setProfie(profile);
+            ((ProfileHolder)holder).ibProfile.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    post.onLongClickedProfile();
+                    return true;
+                }
+            });
         }else {
             PostClass post=(PostClass)items.get(position).getObject();
             ((PostHolder)holder).setPost((post));
